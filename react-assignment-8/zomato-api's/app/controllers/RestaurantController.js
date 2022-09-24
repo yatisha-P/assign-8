@@ -76,23 +76,18 @@ getFilterRestaurant : async function (request,response){
 
     if(mealtype) filterObject["mealtype_id"] = mealtype;
     if(location) filterObject["location_id"] = location;
-    if(cuisine) filterObject["cuisine_id"] = {$in:cuisine};
+    if(cuisine){
+        const newCuisine = cuisine.map((c) => +c);
+        filterObject["cuisine_id"] = {$in:newCuisine};
+    }
     if(lcost && hcost) filterObject["min_price"] = {$lte:hcost,$gte:lcost};
 
     //console.log(filterObject);
 
     try{
-        let result = await RestaurantModel.find(filterObject,{
-            aggregate_rating:1,
-            city:1,
-            cuisine:1,
-            image:1,
-            locality:1,
-            min_price:1,
-            name:1
-        }).sort({min_price:sort});
+        let result = await RestaurantModel.find(filterObject).sort({min_price:sort});
         let filterResult = result.slice(staringIndex, lastIndex);
-        response.status(200).send({
+        response.status(200).send({filterObject,result,
           status: true,
           result: filterResult,
           pageCount: Math.ceil(result.length/2), //gives a round number
