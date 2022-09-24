@@ -4,7 +4,7 @@ import HomePage from "./components/home_comp/HomePage";
 import FilterSearchPage from './components/filtersearch_comp/FilterSearchPage';
 import Restaurant from "./components/restaurant_comp/Restaurant";
 import{Routes,Route}from "react-router-dom";
-import RegistrationForm from "./components/user_comp/RegistrationForm";
+// import RegistrationForm from "./components/user_comp/RegistrationForm";
 
 
 

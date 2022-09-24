@@ -5,6 +5,7 @@ const restaurant = require("../controllers/RestaurantController");
 const mealType = require("../controllers/MealTypeControlller");
 const menuItem = require("../controllers/MenuItemController");
 const payment = require("../controllers/PaymentController");
+const users = require("../controllers/UsersController")
 
 router.get("/",location.apiHome);
 
@@ -27,6 +28,9 @@ router.post("/add-meal-type-list" ,mealType.addMealTypes);
 //menuItems
 router.get("/get-menu-item-list",menuItem.getMenuItems );
 router.post("/add-menu-item-list",menuItem.addMenuItems);
+
+//sign-up
+router.post("/sign-up", users.userSignUp);
 
 //payment 
 router.post("/payment", payment.getPaymentApi); //react
