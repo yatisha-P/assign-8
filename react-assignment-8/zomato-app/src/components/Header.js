@@ -54,6 +54,21 @@ function Header(props) {
     }
   },[]);
 
+
+  const changeLocalStorage = () => {
+    let token=  localStorage.getItem("auth_token");
+    if(token){
+      var decoded = jwt_decode(token);
+      setLogin(decoded);
+    }else{
+      setLogin(null);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("itemInserted", changeLocalStorage, false);
+  }, [])
+
   return (
     <>
       <GoogleOAuthProvider clientId="25843935075-j3s5su4bmuoupcd7d3lbtpgur3bumgk4.apps.googleusercontent.com">
